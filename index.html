@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Insurance Premium Prediction</title>
+    <style>
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Health Insurance Premium Prediction</h1>
+
+<div class="container">
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" placeholder="Enter age">
+    </div>
+    <div class="form-group">
+        <label for="sex">Sex:</label>
+        <select id="sex">
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="bmi">BMI:</label>
+        <input type="number" id="bmi" placeholder="Enter BMI">
+    </div>
+    <div class="form-group">
+        <label for="children">Number of Children:</label>
+        <input type="number" id="children" placeholder="Enter number of children">
+    </div>
+    <div class="form-group">
+        <label for="smoker">Smoker:</label>
+        <select id="smoker">
+            <option value="0">Yes</option>
+            <option value="1">No</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="region">Region:</label>
+        <select id="region">
+            <option value="0">Southeast</option>
+            <option value="1">Southwest</option>
+            <option value="2">Northeast</option>
+            <option value="3">Northwest</option>
+        </select>
+    </div>
+    <button onclick="predict()">Predict</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    function predict() {
+        // Get user input values
+        var age = document.getElementById('age').value;
+        var sex = document.getElementById('sex').value;
+        var bmi = document.getElementById('bmi').value;
+        var children = document.getElementById('children').value;
+        var smoker = document.getElementById('smoker').value;
+        var region = document.getElementById('region').value;
+
+        // Make AJAX request to the server to predict premium
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/predict', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                document.getElementById('result').innerHTML = 'The predicted insurance cost is $' + xhr.responseText;
+            } else {
+                alert('Error occurred while predicting premium.');
+            }
+        };
+        xhr.send(JSON.stringify({
+            age: age,
+            sex: sex,
+            bmi: bmi,
+            children: children,
+            smoker: smoker,
+            region: region
+        }));
+    }
+</script>
+
+</body>
+</html>
