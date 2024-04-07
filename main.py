@@ -13,7 +13,7 @@ from sklearn import metrics
 # step2 => Data Collection and Manipulation
 
 # loading the data from csv file to a Pandas DataFrame
-insurance_dataset = pd.read_csv('./insurance.csv')
+insurance_dataset = pd.read_csv('./cleaned_data.csv')
 
 # first 5 rows of the dataframe
 insurance_dataset.head()
