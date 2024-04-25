@@ -26,11 +26,8 @@ insurance_dataset.info()
 
 # checking for missing values
 insurance_dataset.isnull().sum()
-
 insurance_dataset.duplicated().sum()
-
 insurance_dataset.drop_duplicates()
-
 insurance_dataset.isnull().sum()
 
 

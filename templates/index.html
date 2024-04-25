@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Premium Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1> 🩺 Insurance Premium Prediction</h1>
+        <form action="/predict" method="post">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="1" max="100" placeholder="Enter Age in between 1-100 " required><br><br>
+            
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex">
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+            </select><br><br>
+
+            <label for="bmi">BMI:</label>
+            <input type="number" id="bmi" name="bmi"  min="15" max="50" step="0.01" placeholder="Enter BMI in between 15-50 "  required><br><br>
+            
+            <label for="children">Children:</label>
+            <input type="number" id="children" name="children" min="0" max="15" placeholder="Enter children in between 0-10 "  required><br><br>
+
+            <label for="smoker">Smoker:</label>
+            <select id="smoker" name="smoker">
+                <option value="0">Yes</option>
+                <option value="1">No</option>
+            </select><br><br>
+
+            <label for="region">Region:</label>
+            <select id="region" name="region">
+                <option value="0">Southeast</option>
+                <option value="1">Southwest</option>
+                <option value="2">Northeast</option>
+                <option value="3">Northwest</option>
+            </select><br><br>
+
+            <input type="submit" value="Predict">
+        </form>
+        
+        {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
